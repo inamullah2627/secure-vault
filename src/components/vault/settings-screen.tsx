@@ -1,0 +1,11 @@
+"use client";
+
+import { ChangeEvent, RefObject } from "react";
+import { eraseVault, exportVault, type VaultData } from "@/lib/vault";
+
+type Props = { data:VaultData; persist:(data:VaultData)=>Promise<void>; lock:()=>void; restore:(event:ChangeEvent<HTMLInputElement>)=>void; fileRef:RefObject<HTMLInputElement|null> };
+export default function SettingsScreen({ data,persist,lock,restore,fileRef }: Props) {
+  const update=(field:keyof VaultData["settings"],value:number|boolean)=>persist({...data,settings:{...data.settings,[field]:value}});
+  async function backup(){const blob=new Blob([await exportVault()],{type:"application/json"});const url=URL.createObjectURL(blob);const anchor=document.createElement("a");anchor.href=url;anchor.download=`securevault-${new Date().toISOString().slice(0,10)}.securevault`;anchor.click();URL.revokeObjectURL(url)}
+  return <main className="solo settings"><h1>Settings</h1><h2>Security</h2><section className="card settings-card"><div><span>Auto-lock after</span><select value={data.settings.autoLockMinutes} onChange={event=>void update("autoLockMinutes",+event.target.value)}><option value="1">1 minute</option><option value="5">5 minutes</option><option value="15">15 minutes</option></select></div><div><span>Clear clipboard after</span><select value={data.settings.clearClipboardSeconds} onChange={event=>void update("clearClipboardSeconds",+event.target.value)}><option value="15">15 seconds</option><option value="30">30 seconds</option><option value="60">60 seconds</option></select></div><label><span>Lock when tab is hidden</span><input type="checkbox" checked={data.settings.lockWhenHidden} onChange={event=>void update("lockWhenHidden",event.target.checked)}/></label></section><h2>Backup</h2><p className="tip">Keep an encrypted copy. The backup still requires your master password.</p><div className="backup"><button onClick={()=>void backup()}>Export encrypted backup</button><button onClick={()=>fileRef.current?.click()}>Restore from backup</button><input ref={fileRef} hidden type="file" accept=".securevault" onChange={restore}/></div><section className="erase"><div><h2>Erase vault</h2><p>Permanently deletes all data on this device.</p></div><button onClick={async()=>{if(confirm("Permanently erase this vault?")){await eraseVault();lock();location.reload()}}}>Erase</button></section></main>;
+}
