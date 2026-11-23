@@ -11,6 +11,7 @@ export default function PwaManager() {
   const [installPrompt, setInstallPrompt] = useState<InstallPromptEvent | null>(null);
   const [showIOSHelp, setShowIOSHelp] = useState(false);
   const [updateWorker, setUpdateWorker] = useState<ServiceWorker | null>(null);
+  const [folded, setFolded] = useState(false);
 
   useEffect(() => {
     const standalone = window.matchMedia("(display-mode: standalone)").matches;
@@ -24,6 +25,7 @@ export default function PwaManager() {
     const installed = () => {
       setInstallPrompt(null);
       setShowIOSHelp(false);
+      setFolded(false);
     };
 
     window.addEventListener("beforeinstallprompt", captureInstallPrompt);
@@ -76,12 +78,21 @@ export default function PwaManager() {
     );
   }
 
+  if (folded && (installPrompt || showIOSHelp)) {
+    return (
+      <button className="pwa-folded" aria-label="Show install SecureVault prompt" onClick={() => setFolded(false)}>
+        ‹
+      </button>
+    );
+  }
+
   if (installPrompt) {
     return (
       <aside className="pwa-prompt" aria-live="polite">
+        <button className="pwa-dismiss" aria-label="Minimize install prompt" onClick={() => setFolded(true)}>×</button>
         <strong>Install SecureVault</strong>
         <p>Use your private vault like an app, even offline.</p>
-        <button onClick={() => void install()}>Install</button>
+        <button className="pwa-action" onClick={() => void install()}>Install</button>
       </aside>
     );
   }
@@ -89,9 +100,10 @@ export default function PwaManager() {
   if (showIOSHelp) {
     return (
       <aside className="pwa-prompt" aria-live="polite">
+        <button className="pwa-dismiss" aria-label="Minimize install prompt" onClick={() => setFolded(true)}>×</button>
         <strong>Install SecureVault</strong>
         <p>In Safari, tap Share and then “Add to Home Screen”.</p>
-        <button className="secondary" onClick={() => setShowIOSHelp(false)}>Got it</button>
+        <button className="pwa-action secondary" onClick={() => setShowIOSHelp(false)}>Got it</button>
       </aside>
     );
   }
