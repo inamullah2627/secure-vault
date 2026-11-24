@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import VaultApp from "@/components/vault-app";
+import PwaManager from "@/components/pwa-manager";
 
 export const metadata: Metadata = {
   title: "Open Vault | SecureVault",
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function VaultPage() {
-  return <VaultApp />;
+  return <><VaultApp /><PwaManager /></>;
 }
