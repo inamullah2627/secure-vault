@@ -32,7 +32,13 @@ export default function PwaManager() {
     window.addEventListener("appinstalled", installed);
 
     if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" }).then((registration) => {
+      const registerVaultWorker = async () => {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(registrations
+          .filter((registration) => new URL(registration.scope).pathname === "/")
+          .map((registration) => registration.unregister()));
+
+        const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/app", updateViaCache: "none" });
         if (registration.waiting) setUpdateWorker(registration.waiting);
         registration.addEventListener("updatefound", () => {
           const worker = registration.installing;
@@ -40,7 +46,8 @@ export default function PwaManager() {
             if (worker.state === "installed" && navigator.serviceWorker.controller) setUpdateWorker(worker);
           });
         });
-      }).catch(() => {});
+      };
+      registerVaultWorker().catch(() => {});
 
       let reloading = false;
       navigator.serviceWorker.addEventListener("controllerchange", () => {

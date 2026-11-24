@@ -1,7 +1,7 @@
-const CACHE_NAME = "secure-vault-shell-v2";
+const CACHE_NAME = "secure-vault-shell-v3";
 const APP_SHELL = [
   "/app",
-  "/manifest.webmanifest",
+  "/vault.webmanifest",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
   "/icons/maskable-512.png",
@@ -18,7 +18,7 @@ async function cacheAppShell() {
   const urls = new Set(APP_SHELL.slice(1));
   for (const match of html.matchAll(/(?:src|href)=["']([^"']+)["']/g)) {
     const url = match[1];
-    if (url.startsWith("/_next/") || url.startsWith("/icons/") || url === "/manifest.webmanifest") urls.add(url);
+    if (url.startsWith("/_next/") || url.startsWith("/icons/") || url === "/vault.webmanifest") urls.add(url);
   }
   await Promise.all([...urls].map(async (url) => {
     try {
@@ -68,7 +68,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  if (url.pathname.startsWith("/_next/static/") || url.pathname.startsWith("/icons/") || url.pathname === "/manifest.webmanifest") {
+  if (url.pathname.startsWith("/_next/static/") || url.pathname.startsWith("/icons/") || url.pathname === "/vault.webmanifest") {
     event.respondWith((async () => {
       const cached = await caches.match(request);
       if (cached) return cached;

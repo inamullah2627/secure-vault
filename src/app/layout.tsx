@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import PwaManager from "@/components/pwa-manager";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,11 +16,6 @@ export const metadata: Metadata = {
   applicationName: "SecureVault",
   title: "SecureVault | Private password manager",
   description: "Your private, offline password and information vault.",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "SecureVault",
-  },
   formatDetection: { telephone: false },
   icons: {
     icon: [
@@ -43,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}<PwaManager /></body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
