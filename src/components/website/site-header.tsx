@@ -4,7 +4,7 @@ import styles from "./website-shell.module.css";
 
 const links = [
   ["Password Generator", "/password-generator"],
-  ["Security & Privacy", "/security"],
+  ["Security", "/security"],
   ["Blog", "/blog"],
   ["About", "/about"],
   ["Contact", "/contact"],

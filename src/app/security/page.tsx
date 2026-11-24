@@ -5,8 +5,8 @@ import SiteHeader from "@/components/website/site-header";
 import styles from "./security.module.css";
 
 export const metadata: Metadata = {
-  title: "SecureVault Security and Privacy | How Your Data Is Protected",
-  description: "Learn how SecureVault encrypts data in your browser, stores the vault on your device and helps you protect passwords and private information.",
+  title: "SecureVault Security | How Your Vault Is Protected",
+  description: "Learn how SecureVault uses local encryption, secure key derivation and browser storage to protect passwords and private vault information.",
 };
 
 const howItWorks = [
@@ -37,13 +37,6 @@ const limitations = [
   ["Shared or unlocked devices", "Anyone with access to an unlocked vault may view or copy its contents. Lock the vault and the device when you step away."],
 ];
 
-const privacySummary = [
-  ["Vault information", "SecureVault does not receive the passwords, banking details or private notes stored in your local vault."],
-  ["Master password", "Your master password is used locally for key derivation. A readable copy is not stored in the vault or sent to a SecureVault server."],
-  ["Analytics and cookies", "The current version does not include analytics or advertising tracking inside the vault experience."],
-  ["Advertising boundary", "If advertising is introduced on public information pages later, it will not be placed inside the private vault screens."],
-];
-
 const bestPractices = [
   ["Create a strong master password", "Use a long and unique passphrase. Do not reuse it for email, social media or any other account."],
   ["Keep encrypted backups", "Export a current backup and store it away from the original device. Test your recovery process before you need it."],
@@ -72,13 +65,13 @@ export default function SecurityPage() {
     <div className={styles.site}>
       <SiteHeader active="/security" />
       <nav className={`${styles.container} ${styles.breadcrumb}`} aria-label="Breadcrumb">
-        <Link href="/">Home</Link><span aria-hidden="true">/</span><span aria-current="page">Security &amp; Privacy</span>
+        <Link href="/">Home</Link><span aria-hidden="true">/</span><span aria-current="page">Security</span>
       </nav>
 
       <main className={styles.container}>
         <section className={styles.hero}>
-          <h1>Your vault stays encrypted on your device</h1>
-          <p>SecureVault uses a local-first design. Encryption happens in your browser, and the encrypted vault is stored in that browser profile. Here is a clear explanation of what this protects and where your responsibility begins.</p>
+          <h1>Security built around an encrypted local vault</h1>
+          <p>SecureVault protects your saved passwords, banking details and private notes with encryption inside your browser. The encrypted vault remains in your browser profile, and the master password is not stored as readable text.</p>
         </section>
 
         <section className={styles.section}>
@@ -92,7 +85,7 @@ export default function SecurityPage() {
         <CardSection title="How SecureVault encryption works" intro="These are the protections currently used by the vault, explained without hiding the technical details." items={encryptionDetails} />
 
         <section className={styles.section}>
-          <h2>What SecureVault receives from your vault</h2>
+          <h2>Your vault remains local and encrypted</h2>
           <div className={styles.deviceCard}>
             <div><span>Readable vault contents</span><strong>Not sent</strong></div>
             <div><span>Master password</span><strong>Not sent</strong></div>
@@ -101,8 +94,7 @@ export default function SecurityPage() {
         </section>
 
         <CardSection title="What SecureVault helps protect" intro="These safeguards reduce common risks, but no password manager can remove every threat." items={protections} columns={3} />
-        <CardSection title="Important security limitations" intro="We explain these limitations openly so you can decide whether this storage model fits your needs." items={limitations} />
-        <CardSection title="Your privacy in plain language" items={privacySummary} />
+        <CardSection title="Important security limitations" intro="Understanding these limits helps you use the vault safely and choose the right protection for your information." items={limitations} />
         <CardSection title="How to protect your vault" items={bestPractices} />
 
         <section className={styles.report}>

@@ -4,9 +4,9 @@ import styles from "./website-shell.module.css";
 
 const groups = [
   { title: "Product", links: [["Open Vault", "/app"], ["Password Generator", "/password-generator"]] },
-  { title: "Learn", links: [["Blog", "/blog"], ["Security & Privacy", "/security"]] },
+  { title: "Learn", links: [["Blog", "/blog"], ["Security", "/security"]] },
   { title: "Company", links: [["About", "/about"], ["Contact", "/contact"]] },
-  { title: "Legal", links: [["Privacy policy", "/security"], ["Terms of use", "/about"]] },
+  { title: "Legal", links: [["Privacy policy", "/privacy-policy"], ["Terms and conditions", "/terms-and-conditions"]] },
 ];
 
 export default function SiteFooter() {
