@@ -10,7 +10,7 @@ const links = [
   ["Contact", "/contact"],
 ];
 
-export default function SiteHeader() {
+export default function SiteHeader({ active }: { active?: string }) {
   return (
     <header className={styles.header}>
       <nav className={styles.nav} aria-label="Main navigation">
@@ -19,7 +19,11 @@ export default function SiteHeader() {
           <span>SecureVault</span>
         </Link>
         <div className={styles.links}>
-          {links.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+          {links.map(([label, href]) => (
+            <Link className={active === href ? styles.active : undefined} aria-current={active === href ? "page" : undefined} key={href} href={href}>
+              {label}
+            </Link>
+          ))}
         </div>
         <Link className={styles.openVault} href="/app">Open Vault</Link>
       </nav>

@@ -59,6 +59,11 @@
   color: #e8eef7;
 }
 
+.links a.active {
+  color: #5eead4;
+  font-weight: 600;
+}
+
 .openVault {
   min-height: 48px;
   padding: 0 24px;
