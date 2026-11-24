@@ -5,7 +5,7 @@ import SiteHeader from "@/components/website/site-header";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
-  title: "SecureVault — Private Offline Password Manager",
+  title: "SecureVault | Private Offline Password Manager",
   description:
     "Store passwords, bank details, and private notes in an encrypted vault that stays on your device.",
 };
@@ -13,40 +13,40 @@ export const metadata: Metadata = {
 const steps = [
   {
     title: "Create a master password",
-    body: "Choose one strong password. It is never stored and cannot be recovered.",
+    body: "Choose one long, unique password to unlock your vault. We cannot recover it for you, so keep it somewhere safe.",
   },
   {
     title: "Save your information",
-    body: "Add logins, bank details and notes. Each item is encrypted before it is stored.",
+    body: "Add logins, bank details, recovery codes or private notes. Each item is encrypted before it is saved on your device.",
   },
   {
     title: "Access it locally",
-    body: "Unlock with your master password, even without an internet connection.",
+    body: "Open your vault with the master password whenever you need it. Once loaded, your saved data can be accessed offline.",
   },
 ];
 
 const features = [
-  ["Encrypted password storage", "Logins stored as AES-256 encrypted records on your device."],
-  ["Banking information", "Bank accounts and details, hidden until you choose to show them."],
-  ["Secure notes", "Recovery codes, API keys and private notes in one place."],
-  ["Password generator", "Create strong, random passwords in your browser."],
-  ["Password health", "Find weak and reused passwords in your vault."],
-  ["Encrypted backup", "Export an encrypted file and restore it any time."],
+  ["Encrypted password storage", "Keep every login in its own AES-256 encrypted record instead of reusing passwords or leaving them in unprotected notes."],
+  ["Banking information", "Store account details in one private place and reveal sensitive information only when you need it."],
+  ["Secure notes", "Keep recovery codes, API keys and information that does not belong in an ordinary notes app."],
+  ["Password generator", "Create long, random passwords in your browser without trying to invent a memorable pattern."],
+  ["Password health", "Quickly spot short or reused passwords so you know which accounts need attention first."],
+  ["Encrypted backup", "Export an encrypted copy of your vault and use it to restore your information when needed."],
 ];
 
 const reasons = [
-  ["Local-first privacy", "Your vault lives on your device, not on our servers."],
-  ["Simple interface", "Set up in minutes, with no technical knowledge needed."],
-  ["No tracking inside the vault", "No analytics or ads in the vault screens."],
-  ["You control your backup", "You decide where your encrypted backup is kept."],
+  ["Local-first privacy", "Your working vault stays on your device instead of being stored in a SecureVault online account."],
+  ["Simple by design", "Create a vault and start saving information in minutes. No technical setup or complicated menus."],
+  ["A private vault experience", "There are no analytics or advertisements inside the screens where you manage sensitive information."],
+  ["Your backup, your choice", "You decide when to create an encrypted backup and where that file should be kept."],
 ];
 
 const faqs = [
-  ["Where is my data stored?", "In your browser’s local database on your own device, encrypted."],
-  ["Can you see my passwords?", "No. Your vault is encrypted on your device and never sent to us."],
-  ["What happens if I forget the master password?", "It cannot be recovered, so keep it safe and keep an encrypted backup."],
-  ["Can I use it offline?", "Yes. Once loaded, the vault works without an internet connection."],
-  ["How do backups work?", "You export an encrypted file and restore it later with your master password."],
+  ["Where is my data stored?", "Your encrypted vault is stored in the browser’s local database on the device you are using. It is not saved in a SecureVault cloud account."],
+  ["Can SecureVault see my passwords?", "No. Encryption happens on your device, and your saved vault data is not sent to SecureVault servers."],
+  ["What if I forget my master password?", "It cannot be recovered or reset for you. Keep it safe and maintain an encrypted backup of the vault."],
+  ["Can I use SecureVault offline?", "Yes. After the app has loaded, you can unlock and use your locally stored vault without an internet connection."],
+  ["How do encrypted backups work?", "Export the vault as an encrypted file and store it somewhere you trust. Restoring it still requires the correct master password."],
 ];
 
 function ContentCard({ title, body }: { title: string; body: string }) {
@@ -96,11 +96,11 @@ export default function Home() {
         <section className={styles.hero}>
           <div className={`${styles.container} ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
-              <span className={styles.tag}>Offline-first password manager</span>
-              <h1>Your passwords stay on your device</h1>
+              <span className={styles.tag}>Private, local-first password manager</span>
+              <h1>Keep your passwords private and close to you</h1>
               <p>
-                SecureVault encrypts your passwords, bank details and notes with AES-256 in your browser. No account,
-                no server and no tracking inside the vault.
+                SecureVault gives you one encrypted place for passwords, bank details and private notes. Your vault is
+                protected in your browser and stored on your device. No online account is required.
               </p>
               <div className={styles.actions}>
                 <Link className={styles.primaryButton} href="/app">Open Secure Vault</Link>
@@ -123,7 +123,7 @@ export default function Home() {
         <section className={styles.section}>
           <div className={styles.container}>
             <h2>How it works</h2>
-            <p className={styles.sectionIntro}>Three steps, all inside your browser.</p>
+            <p className={styles.sectionIntro}>Start with one master password, then let the vault handle the rest.</p>
             <div className={styles.threeColumnGrid}>
               {steps.map((step, index) => (
                 <ContentCard key={step.title} title={`${index + 1}. ${step.title}`} body={step.body} />
@@ -134,8 +134,8 @@ export default function Home() {
 
         <section className={`${styles.section} ${styles.alternateSection}`}>
           <div className={styles.container}>
-            <h2>Main features</h2>
-            <p className={styles.sectionIntro}>Everything you need to keep sensitive information organized and private.</p>
+            <h2>Everything important, in one private vault</h2>
+            <p className={styles.sectionIntro}>Useful tools for organizing sensitive information without making security feel complicated.</p>
             <div className={styles.threeColumnGrid}>
               {features.map(([title, body]) => <ContentCard key={title} title={title} body={body} />)}
             </div>
@@ -144,7 +144,8 @@ export default function Home() {
 
         <section className={styles.section}>
           <div className={styles.container}>
-            <h2>Why SecureVault</h2>
+            <h2>Why people choose SecureVault</h2>
+            <p className={styles.sectionIntro}>Privacy should be understandable. You should know where your data lives and who controls it.</p>
             <div className={styles.twoColumnGrid}>
               {reasons.map(([title, body]) => <ContentCard key={title} title={title} body={body} />)}
             </div>
@@ -157,8 +158,9 @@ export default function Home() {
               <span className={styles.tag}>Designed for privacy</span>
               <h2>How your data is protected</h2>
               <p className={styles.sectionIntro}>
-                Your master password derives an encryption key. Your data is encrypted with that key in your browser
-                and only the encrypted result is stored on your device. Nothing is sent to a server.
+                Your master password is used to create the key that unlocks your vault. Encryption happens inside your
+                browser, and only encrypted vault data is stored on the device. SecureVault does not receive your master
+                password or a readable copy of the information you save.
               </p>
               <Link className={styles.secondaryButton} href="/security">Learn about security</Link>
             </div>
@@ -185,8 +187,8 @@ export default function Home() {
         <section className={styles.ctaSection}>
           <div className={styles.container}>
             <div className={styles.ctaCard}>
-              <h2>Create your private vault</h2>
-              <p>Free to use, no account needed.</p>
+              <h2>Ready to create your private vault?</h2>
+              <p>Start with one strong master password. No signup or online account required.</p>
               <Link className={styles.primaryButton} href="/app">Open Vault</Link>
             </div>
           </div>

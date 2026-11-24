@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SecureVault — Private password manager",
+  title: "SecureVault | Private password manager",
   description: "Your private, offline password and information vault.",
 };
 

@@ -1,7 +1,7 @@
 import type { VaultEntry } from "@/lib/vault";
 
 type FieldProps = { label: string; value?: string; secret?: boolean; revealed: boolean; reveal: () => void; copy: (value: string) => void };
-function DetailField({ label, value, secret = false, revealed, reveal, copy }: FieldProps) { return <div className="field"><label>{label}</label><div><span>{secret&&!revealed?"••••••••••••":value||"—"}</span>{secret&&<button onClick={reveal}>{revealed?"Hide":"Show"}</button>}<button onClick={()=>copy(value||"")}>Copy</button></div></div>; }
+function DetailField({ label, value, secret = false, revealed, reveal, copy }: FieldProps) { return <div className="field"><label>{label}</label><div><span>{secret&&!revealed?"••••••••••••":value||"Not added"}</span>{secret&&<button onClick={reveal}>{revealed?"Hide":"Show"}</button>}<button onClick={()=>copy(value||"")}>Copy</button></div></div>; }
 
 type Props = { entry: VaultEntry; revealed: boolean; reveal: () => void; copy: (value: string) => void; edit: () => void; remove: () => void; favorite: () => void };
 export default function EntryDetail({ entry, revealed, reveal, copy, edit, remove, favorite }: Props) {

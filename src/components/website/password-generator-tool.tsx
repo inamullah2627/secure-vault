@@ -104,18 +104,18 @@ export default function PasswordGeneratorTool() {
       </div>
 
       {/*
-        AD SLOT — Password Generator
+        AD SLOT: Password Generator
         Keep this position reserved for the future ad component shown in the design.
         Ads are intentionally disabled for now; render the ad here when needed.
       */}
 
       <section className={styles.strengthSection} aria-labelledby="strength-heading">
-        <h2 id="strength-heading">Strength result</h2>
+        <h2 id="strength-heading">Your password strength</h2>
         <div className={styles.strengthCard}>
           <strong>{strength.label}</strong>
           <div className={styles.strengthTrack} aria-hidden="true"><span style={{ width: `${strength.percent}%` }} /></div>
-          <p>Estimated entropy: about {strength.entropy} bits</p>
-          <ul><li>Use at least 16 characters.</li><li>Add symbols and numbers for variety.</li><li>Never reuse this password elsewhere.</li></ul>
+          <p>Estimated randomness: about {strength.entropy} bits</p>
+          <ul><li>Choose at least 16 characters.</li><li>Use several character types when the website allows them.</li><li>Keep this password unique to one account.</li></ul>
         </div>
       </section>
     </>

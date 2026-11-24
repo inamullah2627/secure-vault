@@ -8,7 +8,7 @@ export function entryIcon(kind: EntryKind) { return kind === "bank" ? "B" : kind
 
 export function entrySubtitle(entry: VaultEntry) {
   if (entry.kind === "login") return entry.username || entry.website || "Login";
-  if (entry.kind === "bank") return `Account ending ${entry.accountNumber?.slice(-4) || "—"}`;
+  if (entry.kind === "bank") return `Account ending ${entry.accountNumber?.slice(-4) || "not added"}`;
   return `Updated ${new Date(entry.updatedAt).toLocaleDateString()}`;
 }
 

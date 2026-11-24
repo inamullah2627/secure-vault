@@ -5,50 +5,50 @@ import SiteHeader from "@/components/website/site-header";
 import styles from "./security.module.css";
 
 export const metadata: Metadata = {
-  title: "Security & Privacy – How SecureVault Protects Data",
-  description: "Learn how SecureVault encrypts your vault in the browser, what stays on your device, and the limits of local-first security.",
+  title: "SecureVault Security and Privacy | How Your Data Is Protected",
+  description: "Learn how SecureVault encrypts data in your browser, stores the vault on your device and helps you protect passwords and private information.",
 };
 
 const howItWorks = [
-  ["Master password", "Typed by you and never stored."],
-  ["Key derivation", "PBKDF2-SHA-256 with a random salt creates the key."],
-  ["Encryption", "AES-GCM 256-bit with a unique IV for every record."],
-  ["Browser storage", "Only encrypted data is saved in IndexedDB."],
+  ["You enter the master password", "The password is used on your device to unlock the vault. SecureVault does not save a readable copy of it."],
+  ["A secure key is created", "PBKDF2 with SHA-256, 600,000 iterations and a random salt derives the encryption key from your master password."],
+  ["The complete vault is encrypted", "AES-GCM with a 256-bit key encrypts the vault before it is written to browser storage."],
+  ["Encrypted data is stored locally", "IndexedDB stores the encrypted vault record in the browser profile you are currently using."],
 ];
 
 const encryptionDetails = [
-  ["AES-GCM 256-bit", "Authenticated encryption that also detects tampering."],
-  ["PBKDF2-SHA-256", "Slows down guessing of the master password."],
-  ["Random salt", "Each vault has its own salt."],
-  ["Unique IV", "A new initialization vector for every encrypted item."],
-  ["IndexedDB", "Encrypted records stay in your browser storage."],
+  ["AES-GCM with a 256-bit key", "This authenticated encryption protects confidentiality and causes decryption to fail when encrypted data has been altered."],
+  ["PBKDF2 with SHA-256", "The key derivation process performs 600,000 iterations to make repeated master password guesses more expensive."],
+  ["Random vault salt", "A new random salt is created when the vault is set up, so the same master password does not produce the same derived key across separate vaults."],
+  ["Fresh IV for every save", "SecureVault creates a new random initialization vector whenever the complete vault record is encrypted and saved."],
+  ["Local IndexedDB storage", "The encrypted record remains in the current browser profile unless you export it yourself as an encrypted backup."],
 ];
 
 const protections = [
-  ["Reading the stored vault", "Stored data is unreadable without the master password."],
-  ["Exposed device data", "Data on disk is encrypted, not plain text."],
-  ["Casual access", "Auto-lock and hidden fields reduce shoulder surfing."],
+  ["Someone reading browser storage", "The saved record is encrypted rather than stored as readable passwords, account details or notes."],
+  ["A lost encrypted backup", "The exported backup remains encrypted and still requires the correct master password to open."],
+  ["Casual access to an open device", "Auto-lock settings, hidden sensitive fields and the option to lock when the tab is hidden help reduce accidental exposure."],
 ];
 
 const limitations = [
-  ["Malware or a compromised browser", "Cannot be fully protected against."],
-  ["Forgotten master password", "It cannot be recovered."],
-  ["Weak master password", "It reduces security a lot."],
-  ["Shared devices", "Others with access may see an unlocked vault."],
+  ["Malware or a compromised browser", "Malicious software may capture information after you unlock the vault. SecureVault cannot make an infected device safe."],
+  ["A forgotten master password", "There is no password reset or recovery back door. If you lose the master password, the encrypted vault may become inaccessible."],
+  ["A weak or reused master password", "Encryption cannot compensate for an easy password. Use a long, unique passphrase that is never used on another account."],
+  ["Shared or unlocked devices", "Anyone with access to an unlocked vault may view or copy its contents. Lock the vault and the device when you step away."],
 ];
 
 const privacySummary = [
-  ["What we collect", "[List, for example anonymous page analytics on this website.]"],
-  ["What we do not collect", "Vault contents and master passwords."],
-  ["Analytics and cookies", "[Describe analytics and cookie use.]"],
-  ["Advertising disclosure", "[If AdSense is used: ads appear on public pages only, never inside the vault.]"],
+  ["Vault information", "SecureVault does not receive the passwords, banking details or private notes stored in your local vault."],
+  ["Master password", "Your master password is used locally for key derivation. A readable copy is not stored in the vault or sent to a SecureVault server."],
+  ["Analytics and cookies", "The current version does not include analytics or advertising tracking inside the vault experience."],
+  ["Advertising boundary", "If advertising is introduced on public information pages later, it will not be placed inside the private vault screens."],
 ];
 
 const bestPractices = [
-  ["Strong master password", "Use a long passphrase."],
-  ["Regular encrypted backups", "Keep a copy off the device."],
-  ["Trusted device", "Avoid public computers."],
-  ["Updated browser", "Install security updates."],
+  ["Create a strong master password", "Use a long and unique passphrase. Do not reuse it for email, social media or any other account."],
+  ["Keep encrypted backups", "Export a current backup and store it away from the original device. Test your recovery process before you need it."],
+  ["Use a device you trust", "Avoid unlocking the vault on public or shared computers, and keep your own device protected with a screen lock."],
+  ["Install security updates", "Keep the browser, operating system and extensions updated. Remove extensions you no longer use or trust."],
 ];
 
 function Card({ title, body }: { title: string; body: string }) {
@@ -77,8 +77,8 @@ export default function SecurityPage() {
 
       <main className={styles.container}>
         <section className={styles.hero}>
-          <h1>Designed to keep your data on your device</h1>
-          <p>SecureVault is local-first: your vault is encrypted in your browser and stored on your device. This page explains what it does, and what it cannot do.</p>
+          <h1>Your vault stays encrypted on your device</h1>
+          <p>SecureVault uses a local-first design. Encryption happens in your browser, and the encrypted vault is stored in that browser profile. Here is a clear explanation of what this protects and where your responsibility begins.</p>
         </section>
 
         <section className={styles.section}>
@@ -89,25 +89,25 @@ export default function SecurityPage() {
           </div>
         </section>
 
-        <CardSection title="Encryption details" items={encryptionDetails} />
+        <CardSection title="How SecureVault encryption works" intro="These are the protections currently used by the vault, explained without hiding the technical details." items={encryptionDetails} />
 
         <section className={styles.section}>
-          <h2>What leaves your device</h2>
+          <h2>What SecureVault receives from your vault</h2>
           <div className={styles.deviceCard}>
-            <div><span>Vault data</span><strong>Nothing</strong></div>
-            <div><span>Master password</span><strong>Nothing</strong></div>
-            <div><span>Backup</span><strong className={styles.warning}>Encrypted file only, saved by you</strong></div>
+            <div><span>Readable vault contents</span><strong>Not sent</strong></div>
+            <div><span>Master password</span><strong>Not sent</strong></div>
+            <div><span>Encrypted backup</span><strong className={styles.warning}>Exported and stored only when you choose</strong></div>
           </div>
         </section>
 
-        <CardSection title="What SecureVault protects against" items={protections} columns={3} />
-        <CardSection title="Limitations and threat model" intro="We list these openly so you can decide what is right for you." items={limitations} />
-        <CardSection title="Privacy policy summary" items={privacySummary} />
-        <CardSection title="Security best practices" items={bestPractices} />
+        <CardSection title="What SecureVault helps protect" intro="These safeguards reduce common risks, but no password manager can remove every threat." items={protections} columns={3} />
+        <CardSection title="Important security limitations" intro="We explain these limitations openly so you can decide whether this storage model fits your needs." items={limitations} />
+        <CardSection title="Your privacy in plain language" items={privacySummary} />
+        <CardSection title="How to protect your vault" items={bestPractices} />
 
         <section className={styles.report}>
           <h2>Report a vulnerability</h2>
-          <p>Email security@[yourdomain].com with steps to reproduce. Please allow us a reasonable time to fix the issue before sharing it publicly.</p>
+          <p>If you discover a security issue, share a clear description, the affected page and safe steps for reproducing it with the SecureVault project owner. Please avoid including real passwords or private vault data in your report, and allow reasonable time for investigation before public disclosure.</p>
         </section>
       </main>
       <SiteFooter />
